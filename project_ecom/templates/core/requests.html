@@ -1,0 +1,83 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<body class="bg-black">
+    <h1 class="text-white text-center fw-lighter m-3">Listado de pedidos</h1>
+    <div class="input-group">
+      <button type="button" class="btn btn-warning text-dark">
+        <a class="text-dark" href="{% url 'core:requests' %}">En proceso</a>
+      </button>
+      &nbsp
+      <button type="button" class="btn btn-warning text-dark">
+        <a class="text-dark" href="{% url 'core:requests_all' %}">Todos</a>
+      </button> 
+
+    </div>
+    <br>
+    <div class="mx-5">
+        <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col align-middle">Codigo</th>
+                <th scope="col align-middle">Estado</th>
+                <th scope="col align-middle">Usuario</th>
+                <th scope="col align-middle">Creation date</th>
+                <th scope="col align-middle">Productos</th>
+                <th scope="col align-middle">Total</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for pur in purchases %}
+                <tr>
+                  <th scope="row" class="align-middle">{{pur.id}}</th>
+                  <td class="align-middle">{{pur.status}}</td>
+                  <td class="align-middle">{{pur.user}}</td>
+                  <td class="align-middle">{{pur.creation_date}}</td>
+                  
+                  <td>
+                    
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th scope="col ">Producto</th>
+                          <th scope="col">Valor individual</th>
+                          <th scope="col">Cantidad</th>
+                          <th scope="col">Subtotal</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for prod in pur.products.all %}
+                          <tr>
+                            <th scope="row">{{prod.product.title}}</th>
+                            <td>${{prod.product.price}}</td>
+                            <td>{{prod.quantity}}</td>
+                            <td>${{prod.subtotal}}</td>
+                          </tr> 
+                        {% endfor %}
+
+                      </tbody>
+                    </table>
+                  </td>
+
+                  <td class="align-middle">${{pur.total}}</td>
+                  <td class="align-middle text-center"> 
+                    <button type="button" class="btn btn-outline-dark bg-light">
+                      <a href="{% url 'core:update_purchase' pur.id %}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+                          <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325"/>
+                        </svg>
+                      </a>
+                    </button>
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+    </div>
+</body>
+
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+
+<body class="bg-dark text-light">
+  
+
+    <div class="text-center">
+      <img src="{% static 'images/yo.jpeg' %}" alt="" class="img-fluid rounded-circle m-5" width="150px">
+      <h1 class="sitename">Maria Groppo</h1>
+      <h2>Quality Engineer &amp; RPA &amp; BI &amp; Data Science Student</h2>
+    </div>
+    
+    
+    <main class="main">
+      
+    <br>
+    <!-- About Section -->
+    <section id="about" class="about section">
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Acerca de mi</h2>
+        <p>Soy María Groppo, Ingeniera Química apasionada por la tecnología y la innovación.</p>
+        <p>A lo largo de mi carrera, he diversificado mis conocimientos, incursionando en el mundo de la programación con lenguajes como JavaScript y Python, y especializándome en Data Science.</p>
+        <p>Actualmente, trabajo en Schneider Electric como Ingeniera de calidad de proveedores y también formo parte del equipo Digital. Desde ahí, realizo tareas de automatización de procesos (RPA, Power Automate, programación), desarrollo tableros interactivos, especialmente en Tableau, y participo en la creación de una página web para dar soporte en la programación de la producción.</p> 
+        <p>Soy madre de dos niños, uno de 7 años y otro de 2, y estoy esperando al tercero. Mi vida personal y profesional se caracteriza por una gran energía, curiosidad y una constante búsqueda de aprendizaje. Me encanta explorar nuevos desafíos, tanto de manera independiente como trabajando en equipo, siempre con la firme convicción de que el trabajo colaborativo enriquece las ideas y soluciones.</p>
+        <p>Me considero una persona comprometida con mi familia, mi carrera y mi crecimiento personal, siempre en busca de nuevos conocimientos que me permitan mejorar y aportar valor en cada proyecto que emprendo.</p>
+        <br>
+        <button type="button" class="btn btn-warning mx-5"><a class="link-opacity-50-hover" href="https://www.linkedin.com/in/maría-emilia-groppo-17613bb9">LinkedIn</a></button>
+      </div><!-- End Section Title -->
+      <br>
+      <br>
+    </section><!-- /About Section -->
+
+</body>
+
+
+{% endblock %}

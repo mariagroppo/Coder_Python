@@ -1,0 +1,21 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+
+    <body>
+        <div class="container bg-light shadow-md p-5 form-layout">
+            <h3 class="align-middle text-center"> CAMBIAR CONTRASENA </h3>
+            <br>
+
+            <form class="align-middle text-center" method="POST" autocomplete="off">
+                {% csrf_token %}
+                {{form.as_p}}
+                <button type="submit" class="btn btn-success w-100 btn-block m-3"> Guardar &nbsp; <i class="fa fa-key" aria-hidden="true"></i> </button>
+            </form>
+
+            
+        </div>
+        <br>
+    </body>
+
+{% endblock %}

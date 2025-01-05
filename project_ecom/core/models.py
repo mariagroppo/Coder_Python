@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -38,7 +39,14 @@ class Purchase(models.Model):
     products = models.ManyToManyField('Items', blank=True)
     total = models.FloatField(default=0)
     status = models.CharField(max_length=30, choices=STATUS_CHOICES, default='Para cargar')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, default=1)
 
     def __str__(self):
         return str(self.creation_date) + " x " + str(self.total) 
+
+
+class UserInfo(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    avatar = models.ImageField(upload_to='avatares', null=True, blank=True)
+    birthDate = models.DateField(null=True)
 

@@ -1,0 +1,94 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<body class="bg-black">
+    
+                        
+
+
+    <div class="page-content page-container" id="page-content">
+        <div class="p-3">
+            <div class="row d-flex justify-content-center m-5">
+                <div class="col">
+                    <div class="card card-bordered">
+                        
+                        {% if msgs %}
+                        <div class="ps-container ps-theme-default ps-active-y" id="chat-content" style="overflow-y: scroll !important; height:400px !important;">
+                            
+                            {% for msg in msgs %}
+                            
+                                {% if msg.from_user == user %}
+                                    <div class="media media-chat media-chat-reverse d-flex flex-row-reverse">
+                                        <img class="avatar" src="{{msg.from_user.userinfo.avatar.url}}" alt="my_pic">
+                                        <div class="media-body">
+                                            {% if user.is_superuser %}
+                                            <div class="d-flex flex-row">
+                                                <p class="fw-bold">Para {{msg.to_user}}:</p>
+                                                <p>{{msg.text}}</p>
+                                            </div>
+                                            {% else %}
+                                            <p>{{msg.text}}</p>
+                                            {% endif %}
+                                            <p class="meta text-black">{{msg.creation_date}}</p>
+                                        </div>
+                                    </div>
+                                {% else %}
+                                    <div class="media media-chat d-flex flex-row">
+                                        <img class="avatar" src="{{msg.from_user.userinfo.avatar.url}}" alt="{{msg.from_user}}">
+                                        <div class="media-body">
+                                            {% if user.is_superuser %}
+                                            <div class="d-flex flex-row">
+                                                <p class="fw-bold">{{msg.from_user}}:</p>
+                                                <p>{{msg.text}}</p>
+                                            </div>
+                                            {% else %}
+                                            <p>{{msg.text}}</p>
+                                            {% endif %}
+                                            <p class="meta text-black"><time datetime="2018">{{msg.creation_date}}</time></p>
+                                        </div>
+                                    </div>
+
+                                {% endif %}
+
+                            
+    
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        <p>No hay mensajes.</p>
+                        {% endif %}
+
+                        <div class="ps-scrollbar-x-rail" style="left: 0px; bottom: 0px;"><div class="ps-scrollbar-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps-scrollbar-y-rail" style="top: 0px; height: 0px; right: 2px;"><div class="ps-scrollbar-y" tabindex="0" style="top: 0px; height: 2px;"></div></div></div>
+            
+                        <div class="publisher bt-1 border-light">
+                            <img class="avatar avatar-xs" src="{{request.user.userinfo.avatar.url}}" alt="...">
+                            <form method="POST" autocomplete="off" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                {{form.as_p}}
+                                
+                                <br>
+                                
+                                <button type="submit" class="btn btn-success">                
+                                    Send &nbsp; <i class="fa fa-check" aria-hidden="true"></i>
+                                </button>
+                                <!-- <a class="publisher-btn text-info" href="#" data-abc="true"><i class="fa fa-paper-plane"></i></a> -->
+                                
+                                
+                            </form>
+                        </div>
+
+                        
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+{% endblock %}
